@@ -3,59 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatima's Elite 20th 👑</title>
+    <title>Fatima's 20th Anniversary 👑</title>
     <style>
         :root { --p: #ff85a1; --dp: #f72585; --g: #ffd700; --b: #0a0a0a; --w: #ffffff; }
-        
-        body { 
-            background: var(--b); color: var(--w); 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; overflow-x: hidden;
-        }
-
-        /* شاشة الدخول */
+        body { background: var(--b); color: var(--w); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
         #auth-screen { text-align: center; z-index: 100; }
-        .pink-input { 
-            background: rgba(255,133,161,0.1); border: 2px solid var(--p); 
-            color: white; padding: 15px; border-radius: 15px; text-align: center; 
-            width: 220px; outline: none; box-shadow: 0 0 15px var(--p);
-        }
-
+        .pink-input { background: rgba(255,133,161,0.1); border: 2px solid var(--p); color: white; padding: 15px; border-radius: 15px; text-align: center; width: 220px; outline: none; box-shadow: 0 0 15px var(--p); }
         #countdown-screen { display: none; font-size: 8rem; color: var(--g); text-shadow: 0 0 30px var(--g); font-weight: bold; }
-
-        /* الواجهة الرئيسية */
         #main-system { display: none; width: 90%; max-width: 500px; text-align: center; padding: 20px 0; }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); 
-            border-radius: 30px; padding: 25px; border: 1px solid var(--p); 
-            box-shadow: 0 0 40px rgba(247, 37, 133, 0.2); 
-        }
-
-        .hbd-text { 
-            font-size: 2.2rem; font-weight: 900; 
-            background: linear-gradient(45deg, var(--p), var(--g), var(--dp)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        }
-
-        /* معرض الصور */
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 30px; padding: 25px; border: 1px solid var(--p); box-shadow: 0 0 40px rgba(247, 37, 133, 0.2); }
+        .hbd-text { font-size: 2.2rem; font-weight: 900; background: linear-gradient(45deg, var(--p), var(--g), var(--dp)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
         .img-item { width: 100%; height: 150px; object-fit: cover; border-radius: 15px; border: 2px solid var(--p); }
-
-        /* قسم الرسائل */
         .message-box { margin-top: 30px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 20px; }
-        textarea { 
-            width: 90%; height: 60px; background: transparent; border: 1px solid var(--p); 
-            color: white; border-radius: 10px; padding: 10px; resize: none; outline: none; margin-top: 10px;
-        }
+        textarea { width: 90%; height: 60px; background: transparent; border: 1px solid var(--p); color: white; border-radius: 10px; padding: 10px; resize: none; outline: none; margin-top: 10px; text-align: right; }
         #messages-list { text-align: right; max-height: 150px; overflow-y: auto; margin-top: 15px; font-size: 0.9rem; }
         .single-msg { background: rgba(255,133,161,0.2); padding: 8px; border-radius: 10px; margin-bottom: 8px; border-right: 3px solid var(--p); }
-
-        .btn { 
-            background: linear-gradient(45deg, var(--p), var(--dp)); color: white; border: none; 
-            padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 10px;
-        }
-
+        .btn { background: linear-gradient(45deg, var(--p), var(--dp)); color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .heart { position: fixed; top: -10%; animation: fall linear forwards; z-index: 50; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
     </style>
@@ -63,25 +27,29 @@
 <body>
 
     <div id="auth-screen">
-        <h2 style="color: var(--p);">أهلاً بصديقات فاطمة 🌸</h2>
+        <div style="font-size: 3rem;">🌸</div>
+        <h2 style="color: var(--p);">أهلاً بصديقات فاطمة الرهيبات</h2>
+        <p style="color: #aaa;">ادخلي الرمز السري لمشاركة فاطمة يوم ميلادها</p>
         <input type="password" id="pass" class="pink-input" placeholder="كلمة السر">
         <br><br>
-        <button class="btn" onclick="unlock()">دخول النظام 👑</button>
+        <button class="btn" onclick="unlock()">دخول 👑</button>
     </div>
 
     <div id="countdown-screen">10</div>
 
     <div id="main-system">
         <div class="glass-card">
-            <div class="hbd-text">HAPPY BIRTHDAY TO ME! ✨</div>
-            <p style="color: var(--p); font-weight: bold;">أهلاً بكنّ في يومي المميّز 💖</p>
-            <p style="font-size: 0.9rem; line-height: 1.5;">
-                اليوم أتممتُ عامي العشرين.. <br>
-                كبرتُ عاماً وكبرت أحلامي معي. شكراً لكل من شاركتني <br>
-                هذه الرحلة بجمال روحها. تفضلوا بمشاهدة صوري!
+            <div class="hbd-text">It's My 20th Birthday! ✨</div>
+            <p style="color: var(--p); font-weight: bold; margin-top: 10px;">أهلاً بكنّ في عالمي الوردي 💖</p>
+            <p style="font-size: 0.9rem; line-height: 1.6;">
+                كبرتُ عاماً وكبرت أحلامي معي.. <br>
+                اليوم أتممتُ العشرين بوجودكنّ حولي. <br>
+                أتمنى أن تستمتعوا بالمفاجأة!
             </p>
 
-            <audio id="bg-music" loop><source src="song.mp3" type="audio/mpeg"></audio>
+            <audio id="bg-music" loop preload="auto">
+                <source src="https://files.catbox.moe/cpw960.mp3" type="audio/mpeg">
+            </audio>
 
             <div class="gallery">
                 <img src="jpg.1.jpeg" class="img-item">
@@ -91,23 +59,23 @@
             </div>
 
             <div class="message-box">
-                <p style="margin:0; font-size: 0.9rem;">اتركي لي رسالة للذكرى ✍️</p>
-                <textarea id="user-msg" placeholder="اكتبي مشاعرك هنا..."></textarea>
-                <button class="btn" style="padding: 8px 20px; font-size: 0.8rem;" onclick="saveMessage()">إرسال الرسالة</button>
+                <p style="margin:0; font-size: 0.9rem;">اتركي لي كلمة تذكرني بوجودك ✍️</p>
+                <textarea id="user-msg" placeholder="اكتبي مشاعرك هنا يا جميلة..."></textarea>
+                <button class="btn" style="padding: 8px 20px; font-size: 0.8rem;" onclick="saveMessage()">إرسال 💌</button>
                 <div id="messages-list"></div>
             </div>
             
-            <p style="font-size: 0.7rem; color: var(--g); margin-top: 15px;">Developed with love by Fatima 👩‍💻</p>
+            <p style="font-size: 0.7rem; color: var(--g); margin-top: 20px;">Created with Love by Fatima 👩‍💻</p>
         </div>
     </div>
 
     <script>
         function unlock() {
             if(document.getElementById('pass').value === "fatima20") {
-                document.getElementById('bg-music').play().catch(e => console.log("Audio on"));
+                document.getElementById('bg-music').play();
                 document.getElementById('auth-screen').style.display = 'none';
                 startCD();
-            } else { alert("السر: fatima20"); }
+            } else { alert("رمز الدخول هو: fatima20"); }
         }
 
         function startCD() {
