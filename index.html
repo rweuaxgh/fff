@@ -3,130 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatima's Elite 20th System 👑</title>
+    <title>Fatima's Elite 20th 👑</title>
     <style>
-        :root { --p: #ff85a1; --dp: #f72585; --g: #ffd700; --b: #0a0a0a; }
+        :root { --p: #ff85a1; --dp: #f72585; --g: #ffd700; --b: #0a0a0a; --w: #ffffff; }
         
         body { 
-            background: var(--b); 
-            color: white; 
+            background: var(--b); color: var(--w); 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            overflow: hidden; 
+            margin: 0; display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; overflow-x: hidden;
         }
 
         /* شاشة الدخول */
-        #auth-screen { text-align: center; z-index: 100; transition: 0.5s; }
+        #auth-screen { text-align: center; z-index: 100; }
         .pink-input { 
-            background: transparent; 
-            border: 2px solid var(--p); 
-            color: white; 
-            padding: 15px; 
-            border-radius: 15px; 
-            font-size: 1.2rem; 
-            text-align: center; 
-            outline: none; 
-            box-shadow: 0 0 15px var(--p); 
-            margin-bottom: 20px;
-            width: 200px;
+            background: rgba(255,133,161,0.1); border: 2px solid var(--p); 
+            color: white; padding: 15px; border-radius: 15px; text-align: center; 
+            width: 220px; outline: none; box-shadow: 0 0 15px var(--p);
         }
 
-        /* شاشة العد التنازلي */
-        #countdown-screen { 
-            display: none; 
-            text-align: center; 
-            font-size: clamp(5rem, 20vw, 12rem); 
-            color: var(--g); 
-            text-shadow: 0 0 30px var(--g); 
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-        }
+        #countdown-screen { display: none; font-size: 8rem; color: var(--g); text-shadow: 0 0 30px var(--g); font-weight: bold; }
 
-        /* النظام الرئيسي */
-        #main-system { 
-            display: none; 
-            width: 90%; 
-            max-width: 500px; 
-            text-align: center; 
-            animation: fadeIn 1.5s ease;
-        }
-
+        /* الواجهة الرئيسية */
+        #main-system { display: none; width: 90%; max-width: 500px; text-align: center; padding: 20px 0; }
         .glass-card { 
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(15px); 
-            border-radius: 30px; 
-            padding: 25px; 
-            border: 1px solid var(--p); 
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); 
+            border-radius: 30px; padding: 25px; border: 1px solid var(--p); 
             box-shadow: 0 0 40px rgba(247, 37, 133, 0.2); 
         }
 
         .hbd-text { 
-            font-size: 2.5rem; 
-            font-weight: 900; 
+            font-size: 2.2rem; font-weight: 900; 
             background: linear-gradient(45deg, var(--p), var(--g), var(--dp)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin-bottom: 10px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
 
         /* معرض الصور */
-        .gallery { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; 
-            margin-top: 20px; 
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
+        .img-item { width: 100%; height: 150px; object-fit: cover; border-radius: 15px; border: 2px solid var(--p); }
+
+        /* قسم الرسائل */
+        .message-box { margin-top: 30px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 20px; }
+        textarea { 
+            width: 90%; height: 60px; background: transparent; border: 1px solid var(--p); 
+            color: white; border-radius: 10px; padding: 10px; resize: none; outline: none; margin-top: 10px;
         }
-        
-        .img-item { 
-            width: 100%; 
-            height: 160px; 
-            object-fit: cover; 
-            border-radius: 15px; 
-            border: 2px solid var(--p); 
-            transition: 0.3s;
-        }
+        #messages-list { text-align: right; max-height: 150px; overflow-y: auto; margin-top: 15px; font-size: 0.9rem; }
+        .single-msg { background: rgba(255,133,161,0.2); padding: 8px; border-radius: 10px; margin-bottom: 8px; border-right: 3px solid var(--p); }
 
         .btn { 
-            background: linear-gradient(45deg, var(--p), var(--dp)); 
-            color: white; 
-            border: none; 
-            padding: 15px 35px; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 1.1rem; 
-            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+            background: linear-gradient(45deg, var(--p), var(--dp)); color: white; border: none; 
+            padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 10px;
         }
 
-        /* القلوب المتساقطة */
         .heart { position: fixed; top: -10%; animation: fall linear forwards; z-index: 50; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="auth-screen">
-        <h2 style="color: var(--p); margin-bottom: 20px;">ACCESS REQUIRED 👑</h2>
+        <h2 style="color: var(--p);">أهلاً بصديقات فاطمة 🌸</h2>
         <input type="password" id="pass" class="pink-input" placeholder="كلمة السر">
-        <br>
-        <button class="btn" onclick="unlockSystem()">ENTER SYSTEM</button>
+        <br><br>
+        <button class="btn" onclick="unlock()">دخول النظام 👑</button>
     </div>
 
     <div id="countdown-screen">10</div>
 
     <div id="main-system">
         <div class="glass-card">
-            <div class="hbd-text">HAPPY 20th BIRTHDAY FATIMA!</div>
-            <div id="timer-display" style="color: var(--g); font-family: monospace; letter-spacing: 2px; margin-bottom: 15px;"></div>
-            
-            <audio id="bg-music" loop preload="auto">
-                <source src="song.mp3" type="audio/mpeg">
-            </audio>
+            <div class="hbd-text">HAPPY BIRTHDAY TO ME! ✨</div>
+            <p style="color: var(--p); font-weight: bold;">أهلاً بكنّ في يومي المميّز 💖</p>
+            <p style="font-size: 0.9rem; line-height: 1.5;">
+                اليوم أتممتُ عامي العشرين.. <br>
+                كبرتُ عاماً وكبرت أحلامي معي. شكراً لكل من شاركتني <br>
+                هذه الرحلة بجمال روحها. تفضلوا بمشاهدة صوري!
+            </p>
+
+            <audio id="bg-music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
             <div class="gallery">
                 <img src="jpg.1.jpeg" class="img-item">
@@ -134,77 +89,69 @@
                 <img src="jpg.3.jpeg" class="img-item">
                 <img src="jpg.4.jpeg" class="img-item">
             </div>
+
+            <div class="message-box">
+                <p style="margin:0; font-size: 0.9rem;">اتركي لي رسالة للذكرى ✍️</p>
+                <textarea id="user-msg" placeholder="اكتبي مشاعرك هنا..."></textarea>
+                <button class="btn" style="padding: 8px 20px; font-size: 0.8rem;" onclick="saveMessage()">إرسال الرسالة</button>
+                <div id="messages-list"></div>
+            </div>
+            
+            <p style="font-size: 0.7rem; color: var(--g); margin-top: 15px;">Developed with love by Fatima 👩‍💻</p>
         </div>
     </div>
 
     <script>
-        // دالة فتح النظام وتشغيل الصوت
-        function unlockSystem() {
-            const password = document.getElementById('pass').value;
-            const music = document.getElementById('bg-music');
-            
-            if(password === "fatima20") {
-                // أهم سطر لتشغيل الصوت: المتصفح يوافق الآن لأن المستخدم ضغط زر
-                music.play().catch(e => console.log("Music play pending interaction"));
-                
+        function unlock() {
+            if(document.getElementById('pass').value === "fatima20") {
+                document.getElementById('bg-music').play().catch(e => console.log("Audio on"));
                 document.getElementById('auth-screen').style.display = 'none';
-                startCountdown();
-            } else {
-                alert("رمز الدخول غير صحيح يا مبرمجة!");
-            }
+                startCD();
+            } else { alert("السر: fatima20"); }
         }
 
-        // دالة العد التنازلي الاحترافي
-        function startCountdown() {
-            const cd = document.getElementById('countdown-screen');
-            cd.style.display = 'block';
-            let count = 10;
-            
-            const timer = setInterval(() => {
-                count--;
-                cd.innerText = count;
-                if(count === 0) {
-                    clearInterval(timer);
-                    cd.style.display = 'none';
-                    showMainContent();
-                }
+        function startCD() {
+            const s = document.getElementById('countdown-screen');
+            s.style.display = 'block';
+            let c = 10;
+            const t = setInterval(() => {
+                c--; s.innerText = c;
+                if(c === 0) { clearInterval(t); s.style.display = 'none'; showMain(); }
             }, 1000);
         }
 
-        // دالة إظهار المحتوى النهائي
-        function showMainContent() {
+        function showMain() {
             document.getElementById('main-system').style.display = 'block';
-            document.getElementById('bg-music').play(); // تأكيد التشغيل
-            createHearts();
-            updateTimer();
+            document.getElementById('bg-music').play();
+            loadMessages();
+            setInterval(createHearts, 300);
         }
 
-        // تأثير تساقط القلوب والرموز
+        function saveMessage() {
+            const input = document.getElementById('user-msg');
+            if(input.value.trim() === "") return;
+            let msgs = JSON.parse(localStorage.getItem('fatima_msgs') || "[]");
+            msgs.push(input.value);
+            localStorage.setItem('fatima_msgs', JSON.stringify(msgs));
+            input.value = "";
+            loadMessages();
+        }
+
+        function loadMessages() {
+            const list = document.getElementById('messages-list');
+            let msgs = JSON.parse(localStorage.getItem('fatima_msgs') || "[]");
+            list.innerHTML = msgs.map(m => `<div class="single-msg">${m}</div>`).reverse().join('');
+        }
+
         function createHearts() {
-            setInterval(() => {
-                const h = document.createElement('div');
-                h.className = 'heart';
-                h.innerHTML = ["🌸", "💖", "✨", "👑", "🎀"][Math.floor(Math.random()*5)];
-                h.style.left = Math.random() * 100 + "vw";
-                h.style.fontSize = (Math.random() * 20 + 20) + "px";
-                h.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 5000);
-            }, 300);
-        }
-
-        // عداد الأيام المتبقية ليوم ميلادك
-        function updateTimer() {
-            const target = new Date("April 27, 2026 00:00:00").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const diff = target - now;
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                document.getElementById("timer-display").innerText = `${d}D : ${h}H : ${m}M : ${s}S`;
-            }, 1000);
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.innerHTML = ["🌸", "💖", "✨", "👑"][Math.floor(Math.random()*4)];
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = "25px";
+            h.style.animationDuration = "3s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 3000);
         }
     </script>
 </body>
