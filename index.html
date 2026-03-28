@@ -2,42 +2,133 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Fatima's 20th Anniversary 👑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatima's Elite 20th System 👑</title>
     <style>
         :root { --p: #ff85a1; --dp: #f72585; --g: #ffd700; --b: #0a0a0a; }
-        body { background: var(--b); color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; }
-        #auth-screen { text-align: center; z-index: 100; }
-        .pink-input { background: transparent; border: 2px solid var(--p); color: white; padding: 15px; border-radius: 15px; font-size: 1.2rem; text-align: center; outline: none; box-shadow: 0 0 15px var(--p); margin-bottom: 20px; }
-        #countdown-screen { display: none; text-align: center; font-size: 8rem; color: var(--g); text-shadow: 0 0 30px var(--g); font-family: monospace; }
-        #main-system { display: none; width: 90%; max-width: 600px; text-align: center; padding: 20px 0; }
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 30px; padding: 30px; border: 1px solid var(--p); box-shadow: 0 0 40px rgba(255, 133, 161, 0.3); }
-        .hbd-text { font-size: 3rem; font-weight: 900; background: linear-gradient(to right, var(--p), var(--g), var(--dp)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
-        #gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 25px; }
-        .img-item { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; border: 2px solid var(--p); }
-        .btn { background: linear-gradient(45deg, var(--p), var(--dp)); color: white; border: none; padding: 15px 40px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        .heart { position: fixed; top: -10%; animation: fall linear forwards; z-index: 50; }
+        
+        body { 
+            background: var(--b); 
+            color: white; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+        }
+
+        /* شاشة الدخول */
+        #auth-screen { text-align: center; z-index: 100; transition: 0.5s; }
+        .pink-input { 
+            background: transparent; 
+            border: 2px solid var(--p); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 15px; 
+            font-size: 1.2rem; 
+            text-align: center; 
+            outline: none; 
+            box-shadow: 0 0 15px var(--p); 
+            margin-bottom: 20px;
+            width: 200px;
+        }
+
+        /* شاشة العد التنازلي */
+        #countdown-screen { 
+            display: none; 
+            text-align: center; 
+            font-size: clamp(5rem, 20vw, 12rem); 
+            color: var(--g); 
+            text-shadow: 0 0 30px var(--g); 
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        /* النظام الرئيسي */
+        #main-system { 
+            display: none; 
+            width: 90%; 
+            max-width: 500px; 
+            text-align: center; 
+            animation: fadeIn 1.5s ease;
+        }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); 
+            border-radius: 30px; 
+            padding: 25px; 
+            border: 1px solid var(--p); 
+            box-shadow: 0 0 40px rgba(247, 37, 133, 0.2); 
+        }
+
+        .hbd-text { 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            background: linear-gradient(45deg, var(--p), var(--g), var(--dp)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 10px;
+        }
+
+        /* معرض الصور */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
+            margin-top: 20px; 
+        }
+        
+        .img-item { 
+            width: 100%; 
+            height: 160px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            border: 2px solid var(--p); 
+            transition: 0.3s;
+        }
+
+        .btn { 
+            background: linear-gradient(45deg, var(--p), var(--dp)); 
+            color: white; 
+            border: none; 
+            padding: 15px 35px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+        }
+
+        /* القلوب المتساقطة */
+        .heart { position: fixed; top: -10%; animation: fall linear forwards; z-index: 50; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="auth-screen">
-        <h2 style="color: var(--p);">أهلاً يا مبرمجة فاطمة 👑</h2>
+        <h2 style="color: var(--p); margin-bottom: 20px;">ACCESS REQUIRED 👑</h2>
         <input type="password" id="pass" class="pink-input" placeholder="كلمة السر">
         <br>
-        <button class="btn" onclick="checkPass()">فتح المفاجأة 🎁</button>
+        <button class="btn" onclick="unlockSystem()">ENTER SYSTEM</button>
     </div>
 
     <div id="countdown-screen">10</div>
 
     <div id="main-system">
         <div class="glass-card">
-            <div class="hbd-text">HAPPY BIRTHDAY FATIMA!</div>
-            <div id="final-timer" style="color: var(--g); font-size: 1.2rem; margin-bottom: 20px; font-family: monospace;"></div>
-
-            <audio id="player" src="song.mp3" loop preload="auto"></audio>
+            <div class="hbd-text">HAPPY 20th BIRTHDAY FATIMA!</div>
+            <div id="timer-display" style="color: var(--g); font-family: monospace; letter-spacing: 2px; margin-bottom: 15px;"></div>
             
-            <div id="gallery">
+            <audio id="bg-music" loop preload="auto">
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+
+            <div class="gallery">
                 <img src="jpg.1.jpeg" class="img-item">
                 <img src="jpg.2.jpeg" class="img-item">
                 <img src="jpg.3.jpeg" class="img-item">
@@ -47,43 +138,73 @@
     </div>
 
     <script>
-        function checkPass() {
-            const p = document.getElementById('pass').value;
-            const player = document.getElementById('player');
-            if(p === "fatima20") {
-                player.play().catch(e => console.log("Audio play failed"));
+        // دالة فتح النظام وتشغيل الصوت
+        function unlockSystem() {
+            const password = document.getElementById('pass').value;
+            const music = document.getElementById('bg-music');
+            
+            if(password === "fatima20") {
+                // أهم سطر لتشغيل الصوت: المتصفح يوافق الآن لأن المستخدم ضغط زر
+                music.play().catch(e => console.log("Music play pending interaction"));
+                
                 document.getElementById('auth-screen').style.display = 'none';
-                startBigCountdown();
-            } else { alert("كلمة السر: fatima20"); }
+                startCountdown();
+            } else {
+                alert("رمز الدخول غير صحيح يا مبرمجة!");
+            }
         }
 
-        function startBigCountdown() {
-            const screen = document.getElementById('countdown-screen');
-            screen.style.display = 'block';
+        // دالة العد التنازلي الاحترافي
+        function startCountdown() {
+            const cd = document.getElementById('countdown-screen');
+            cd.style.display = 'block';
             let count = 10;
+            
             const timer = setInterval(() => {
                 count--;
-                screen.innerText = count;
+                cd.innerText = count;
                 if(count === 0) {
                     clearInterval(timer);
-                    screen.style.display = 'none';
-                    document.getElementById('main-system').style.display = 'block';
-                    document.getElementById('player').play();
-                    startHearts();
+                    cd.style.display = 'none';
+                    showMainContent();
                 }
             }, 1000);
         }
 
-        function startHearts() {
+        // دالة إظهار المحتوى النهائي
+        function showMainContent() {
+            document.getElementById('main-system').style.display = 'block';
+            document.getElementById('bg-music').play(); // تأكيد التشغيل
+            createHearts();
+            updateTimer();
+        }
+
+        // تأثير تساقط القلوب والرموز
+        function createHearts() {
             setInterval(() => {
                 const h = document.createElement('div');
                 h.className = 'heart';
-                h.innerHTML = ["🌸", "💖", "✨", "👑"][Math.floor(Math.random()*4)];
+                h.innerHTML = ["🌸", "💖", "✨", "👑", "🎀"][Math.floor(Math.random()*5)];
                 h.style.left = Math.random() * 100 + "vw";
+                h.style.fontSize = (Math.random() * 20 + 20) + "px";
                 h.style.animationDuration = (Math.random() * 3 + 2) + "s";
                 document.body.appendChild(h);
                 setTimeout(() => h.remove(), 5000);
             }, 300);
+        }
+
+        // عداد الأيام المتبقية ليوم ميلادك
+        function updateTimer() {
+            const target = new Date("April 27, 2026 00:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById("timer-display").innerText = `${d}D : ${h}H : ${m}M : ${s}S`;
+            }, 1000);
         }
     </script>
 </body>
